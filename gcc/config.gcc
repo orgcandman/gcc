@@ -496,6 +496,10 @@ tilegx*-*-*)
 tilepro*-*-*)
 	cpu_type=tilepro
 	;;
+bpf*-*-*)
+	cpu_type=bpf
+	need_64bit_hwint=bpf
+	;;
 esac
 
 tm_file=${cpu_type}/${cpu_type}.h
@@ -1197,6 +1201,13 @@ bfin*-*)
 	use_collect2=no
 	use_gcc_stdint=wrap
 	;;
+bpf-*-*)
+        tm_file="bpf/linux.h"
+        xm_defines="USG POSIX"
+        tmake_file=""
+        extra_parts=""
+        extra_objs=""
+        c_target_objs="default-c.o"
 cr16-*-elf)
         tm_file="elfos.h ${tm_file} newlib-stdint.h"
         tmake_file="${tmake_file} cr16/t-cr16 "
@@ -3837,6 +3848,11 @@ case "${target}" in
 				tmake_file="${tmake_file} ${tmake_profile_file}"
 			fi
 		fi
+		;;
+
+	bpf-*-*)
+		supported_defaults="cpu"
+		with_cpu=unknown
 		;;
 
 	fr*-*-*linux*)

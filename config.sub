@@ -2,7 +2,7 @@
 # Configuration validation subroutine script.
 #   Copyright 1992-2016 Free Software Foundation, Inc.
 
-timestamp='2016-12-24'
+timestamp='2017-03-07'
 
 # This file is free software; you can redistribute it and/or modify it
 # under the terms of the GNU General Public License as published by
@@ -118,6 +118,7 @@ case $maybe_os in
   linux-musl* | linux-uclibc* | uclinux-uclibc* | uclinux-gnu* | kfreebsd*-gnu* | \
   knetbsd*-gnu* | netbsd*-gnu* | netbsd*-eabi* | \
   kopensolaris*-gnu* | cloudabi*-eabi* | \
+  bpf-* | \
   storm-chaos* | os2-emx* | rtmk-nova*)
     os=-$maybe_os
     basic_machine=`echo $1 | sed 's/^\(.*\)-\([^-]*-[^-]*\)$/\1/'`
@@ -239,6 +240,9 @@ case $os in
 		basic_machine=m68k-atari
 		os=-mint
 		;;
+        -bpf-linux | -bpf)
+		basic_machine=bpf-linux
+		;;
 esac
 
 # Decode aliases for certain CPU-COMPANY combinations.
@@ -257,6 +261,7 @@ case $basic_machine in
 	| ba \
 	| be32 | be64 \
 	| bfin \
+	| bpf \
 	| c4x | c8051 | clipper \
 	| d10v | d30v | dlx | dsp16xx \
 	| e2k | epiphany \
@@ -380,6 +385,7 @@ case $basic_machine in
 	| ba-* \
 	| be32-* | be64-* \
 	| bfin-* | bs2000-* \
+	| bpf-* \
 	| c[123]* | c30-* | [cjt]90-* | c4x-* \
 	| c8051-* | clipper-* | craynv-* | cydra-* \
 	| d10v-* | d30v-* | dlx-* \
